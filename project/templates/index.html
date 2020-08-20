@@ -1,0 +1,27 @@
+{% extends 'common/layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        Sort By: <a href="{{ buildURL('/?order=lastest')}}" class="btn btn-link">Latest</a> <a href="{{ buildURL('/?order=hot')}}" class="btn btn-link">Popular</a>
+
+    </div>
+</div>
+<div class="row" style="margin: 10px 0;">
+    {% if data %}
+    {% for item in data %}
+    <div class="col-md-2">
+        <a class="thumbnail" href="{{ '%s?id=%s' | format(buildURL('/info'), item.id) }}">
+            <img style="width: 100%; height:260px;" src="{{ item.cover_pic | safe }}">
+            <div class="caption">
+                <h3 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:1; ">
+                    {{ item.name | safe }}</h3>
+                <p>{{ item.source | safe }} | {{ item.pub_date.strftime("%Y-%m-%d") | safe }}</p>
+
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% include 'common/pagenation.html' %}
+{% endblock %}

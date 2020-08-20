@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <span class="pageination_count" style="line-height: 84px;"> {{pages.total}} Recods | {{pages.page_size}} per page </span>
+        <ul class="pagination pull-right">
+            {% if pages.is_prev == 1 %}
+            <li>
+                <a href="{{pages.url}}&p={{pages.current - 1}}" aria-label="Previous">
+                    <span aria-hidden="true">Last Page</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for i in pages.range %}
+            <li {% if pages.current == i %} class="active" {% endif %}><a href="{{pages.url}}&p={{i}}">{{i}}</a></li>
+            {% endfor %}
+            {% if pages.is_next == 1 %}
+            <li>
+                <a href="{{pages.url}}&p={{pages.current + 1}}" aria-label="Next">
+                    <span aria-hidden="true">Next Page</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
